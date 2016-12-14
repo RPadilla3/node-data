@@ -2,21 +2,24 @@ var fs = require('fs');
 var parse = require('csv-parse');
 var file = 'parking_feb_2016.csv';
 var theDataFile = null;
-var data = [];
-
-console.log(file);
-
-module.exports = function setup() {
-  return fs.createReadStream('parking_feb_2016.csv').pipe(parse({delimiter: ','}))
-  .on('data', function(csvrow) {
-    data.push(csvrow);
-  })
-  .on('end', function() {
-    console.log(data.length);
-    return data.length;
-  });
 
 
+module.exports = function moduleFunctions() {
+
+  return {
+    rawData: rawData
+  };
+
+  function rawData (done) {
+    var rawData = [];
+     fs.createReadStream('parking_feb_2016.csv').pipe(parse({delimiter: ','}))
+     .on('data', function(csvrow) {
+       rawData.push(csvrow);
+     })
+     .on('end', function() {
+        done(rawData);
+     });
+   }
 
 };
 
