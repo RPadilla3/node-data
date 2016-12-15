@@ -6,3 +6,4 @@ var violationNumber = analyze().violationTypes(function done(data) {
   console.log('Number of violation types: ' + data);
 });
 analyze().violationFrequency();
+analyze().lastTicketinFebruary();
